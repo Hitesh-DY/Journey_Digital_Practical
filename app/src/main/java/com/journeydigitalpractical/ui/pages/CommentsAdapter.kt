@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.journeydigitalpractical.R
 import com.journeydigitalpractical.data.model.Comments
-import kotlinx.android.synthetic.main.single_comment_layout.view.*
+import kotlinx.android.synthetic.main.item_comment_layout.view.*
 
 class CommentsAdapter : RecyclerView.Adapter<CommentsAdapter.CommentsViewHolder>() {
 
@@ -33,7 +33,7 @@ class CommentsAdapter : RecyclerView.Adapter<CommentsAdapter.CommentsViewHolder>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentsViewHolder  = CommentsViewHolder(
         LayoutInflater.from(parent.context).inflate(
-            R.layout.single_comment_layout, parent,
+            R.layout.item_comment_layout, parent,
             false
         )
     )

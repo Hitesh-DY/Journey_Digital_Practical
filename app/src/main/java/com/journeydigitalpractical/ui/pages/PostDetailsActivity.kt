@@ -17,6 +17,8 @@ import com.journeydigitalpractical.viewmodel.CommentsViewModel
 import com.journeydigitalpractical.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_post_details.*
 import kotlinx.android.synthetic.main.activity_post_details.progressDialog
+import kotlinx.android.synthetic.main.activity_post_details.searchView
+import kotlinx.android.synthetic.main.activity_posts.*
 
 /**
  * This activity for show the detail & comments of Post
@@ -74,10 +76,14 @@ class PostDetailsActivity : AppCompatActivity() {
     }
 
     private fun performSearch() {
+        searchView.isIconified = false
+        searchView.clearFocus()
+        searchView.queryHint = "Search In Comments"
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             android.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 commentsAdapter.filterComments(query!!)
+                searchView.clearFocus();
                 return true
             }
 

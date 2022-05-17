@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.journeydigitalpractical.R
 import com.journeydigitalpractical.data.model.Posts
-import kotlinx.android.synthetic.main.single_posts_layout.view.*
+import kotlinx.android.synthetic.main.item_posts_layout.view.*
 
 /**
  * Single post list adapter
@@ -36,7 +36,7 @@ class PostsAdapter : RecyclerView.Adapter<PostsAdapter.PostsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostsViewHolder  = PostsViewHolder(
         LayoutInflater.from(parent.context).inflate(
-            R.layout.single_posts_layout, parent,
+            R.layout.item_posts_layout, parent,
             false
         )
     )

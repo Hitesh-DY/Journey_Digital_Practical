@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent"
     tools:context=".ui.pages.PostsActivity">
 
@@ -14,7 +15,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:background="#55F5F5F5"
-        android:queryHint="Search"
+        app:closeIcon="@null"
         android:imeOptions="actionSearch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

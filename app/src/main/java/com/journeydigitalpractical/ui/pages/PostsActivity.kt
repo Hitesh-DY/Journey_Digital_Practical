@@ -15,7 +15,10 @@ import com.journeydigitalpractical.data.local.DatabaseHelperImpl
 import com.journeydigitalpractical.data.repository.PostsRepository
 import com.journeydigitalpractical.viewmodel.ViewModelFactory
 import com.journeydigitalpractical.viewmodel.PostsViewModel
+import kotlinx.android.synthetic.main.activity_post_details.*
 import kotlinx.android.synthetic.main.activity_posts.*
+import kotlinx.android.synthetic.main.activity_posts.progressDialog
+import kotlinx.android.synthetic.main.activity_posts.searchView
 
 /**
  * Activity for show list of posts
@@ -72,10 +75,14 @@ class PostsActivity : AppCompatActivity() {
     }
 
     private fun performSearch() {
+        searchView.isIconified = false
+        searchView.clearFocus()
+        searchView.queryHint = "Search In Posts"
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             android.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 postsAdapter.filterList(query!!)
+                searchView.clearFocus();
                 return true
             }
 
