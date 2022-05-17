@@ -18,7 +18,6 @@ import com.journeydigitalpractical.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_post_details.*
 import kotlinx.android.synthetic.main.activity_post_details.progressDialog
 import kotlinx.android.synthetic.main.activity_post_details.searchView
-import kotlinx.android.synthetic.main.activity_posts.*
 
 /**
  * This activity for show the detail & comments of Post
