@@ -16,6 +16,7 @@ class SplashActivity : AppCompatActivity() {
             override fun run() {
                 val intent = Intent(this@SplashActivity, PostsActivity::class.java)
                 startActivity(intent)
+                finish()
             }
         }, 3000)
     }
