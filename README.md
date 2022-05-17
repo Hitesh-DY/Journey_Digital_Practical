@@ -3,11 +3,11 @@
 
 ## Features
 
-[x] Use Kotlin, MVVM and Android Jetpack.
-[x] Use the endpoints at https://jsonplaceholder.typicode.com
-[x] Display posts in a list as well as search functionality on the posts list and comments list.
-[x] Open a detailed view with associated comments when user selects an item on the posts list.
-[x] Save the data into local storage.
+- [x] Use Kotlin, MVVM and Android Jetpack.
+- [x] Use the endpoints at https://jsonplaceholder.typicode.com
+- [x] Display posts in a list as well as search functionality on the posts list and comments list.
+- [x] Open a detailed view with associated comments when user selects an item on the posts list.
+- [x] Save the data into local storage.
 
 ## Tech components
 
