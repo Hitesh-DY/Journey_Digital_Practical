@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.journeydigitalpractical.R
@@ -39,6 +40,8 @@ class PostsActivity : AppCompatActivity() {
         val retrofitService = RetrofitService.getInstance()
         val postsRepository = PostsRepository(retrofitService)
 
+        performSearch()
+
         viewModel = ViewModelProvider(this, ViewModelFactory(postsRepository)).get(PostsViewModel::class.java)
 
         // observe the post lists once available load into adapter
@@ -62,4 +65,20 @@ class PostsActivity : AppCompatActivity() {
         // call Api to get post lists
         viewModel.getAllPosts()
     }
+
+    private fun performSearch() {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            android.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                postsAdapter.filterList(query!!)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                postsAdapter.filterList(newText!!)
+                return true
+            }
+        })
+    }
+
 }

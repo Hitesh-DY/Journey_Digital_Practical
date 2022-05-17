@@ -15,12 +15,24 @@ import kotlinx.android.synthetic.main.single_posts_layout.view.*
 class PostsAdapter : RecyclerView.Adapter<PostsAdapter.PostsViewHolder>() {
 
     var postList = mutableListOf<Posts>()
+    var matchedPosts = mutableListOf<Posts>()
     var onItemClick: ((Posts) -> Unit)? = null
 
     @SuppressLint("NotifyDataSetChanged")
     fun setPosts(postList: List<Posts>){
         this.postList = postList.toMutableList()
+        this.matchedPosts = postList.toMutableList()
         notifyDataSetChanged()
+    }
+
+    // Filter list with body & title parameters in post list
+    @SuppressLint("NotifyDataSetChanged")
+    fun filterList(searchQuery : String){
+        if(this.postList.size > 0){
+            this.matchedPosts = this.postList.filter { it.body.lowercase().contains(searchQuery.lowercase())
+                    || it.title.lowercase().contains(searchQuery.lowercase()) } as MutableList<Posts>
+            notifyDataSetChanged()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostsViewHolder  = PostsViewHolder(
@@ -30,9 +42,9 @@ class PostsAdapter : RecyclerView.Adapter<PostsAdapter.PostsViewHolder>() {
         )
     )
 
-    override fun onBindViewHolder(holder: PostsViewHolder, position: Int) = holder.bind(postList[position])
+    override fun onBindViewHolder(holder: PostsViewHolder, position: Int) = holder.bind(matchedPosts[position])
 
-    override fun getItemCount()= postList.size
+    override fun getItemCount()= matchedPosts.size
 
     /**
      * Single post design view holder
@@ -40,7 +52,7 @@ class PostsAdapter : RecyclerView.Adapter<PostsAdapter.PostsViewHolder>() {
     inner class PostsViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         init {
             itemView.setOnClickListener {
-                onItemClick?.invoke(postList[adapterPosition])
+                onItemClick?.invoke(matchedPosts[adapterPosition])
             }
         }
         fun bind(posts: Posts){

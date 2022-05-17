@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.journeydigitalpractical.R
@@ -14,7 +15,6 @@ import com.journeydigitalpractical.viewmodel.CommentsViewModel
 import com.journeydigitalpractical.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_post_details.*
 import kotlinx.android.synthetic.main.activity_post_details.progressDialog
-import kotlinx.android.synthetic.main.activity_posts.*
 
 /**
  * This activity for show the detail & comments of Post
@@ -38,8 +38,9 @@ class PostDetailsActivity : AppCompatActivity() {
         val retrofitService = RetrofitService.getInstance()
         val postsRepository = PostsRepository(retrofitService)
 
-        viewModel = ViewModelProvider(this, ViewModelFactory(postsRepository)).get(CommentsViewModel::class.java)
+        performSearch()
 
+        viewModel = ViewModelProvider(this, ViewModelFactory(postsRepository)).get(CommentsViewModel::class.java)
 
         // observe the post lists once available load into adapter
         viewModel.commentList.observe(this) {
@@ -63,6 +64,21 @@ class PostDetailsActivity : AppCompatActivity() {
         viewModel.getAllCommentsOfPost(id!!)
 
 
+    }
+
+    private fun performSearch() {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            android.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                commentsAdapter.filterComments(query!!)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                commentsAdapter.filterComments(newText!!)
+                return true
+            }
+        })
     }
 
 }

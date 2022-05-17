@@ -12,11 +12,23 @@ import kotlinx.android.synthetic.main.single_comment_layout.view.*
 class CommentsAdapter : RecyclerView.Adapter<CommentsAdapter.CommentsViewHolder>() {
 
     var commentList = mutableListOf<Comments>()
+    var matchedCommentList = mutableListOf<Comments>()
 
     @SuppressLint("NotifyDataSetChanged")
     fun setComments(postList: List<Comments>){
         this.commentList = postList.toMutableList()
+        this.matchedCommentList = postList.toMutableList()
         notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun filterComments(searchQuery : String){
+        if(this.commentList.size > 0){
+            this.matchedCommentList = this.commentList.filter { it.body.lowercase().contains(searchQuery.lowercase())
+                    || it.email.lowercase().contains(searchQuery.lowercase())
+                    || it.name.lowercase().contains(searchQuery.lowercase()) } as MutableList<Comments>
+            notifyDataSetChanged()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentsViewHolder  = CommentsViewHolder(
@@ -26,9 +38,9 @@ class CommentsAdapter : RecyclerView.Adapter<CommentsAdapter.CommentsViewHolder>
         )
     )
 
-    override fun onBindViewHolder(holder: CommentsViewHolder, position: Int) = holder.bind(commentList[position])
+    override fun onBindViewHolder(holder: CommentsViewHolder, position: Int) = holder.bind(matchedCommentList[position])
 
-    override fun getItemCount()= commentList.size
+    override fun getItemCount()= matchedCommentList.size
 
     /**
      * Single comment design view holder
