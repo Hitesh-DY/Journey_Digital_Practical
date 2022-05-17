@@ -1,5 +1,6 @@
 package com.journeydigitalpractical.ui.pages
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.journeydigitalpractical.R
 import com.journeydigitalpractical.data.api.RetrofitService
 import com.journeydigitalpractical.data.repository.PostsRepository
-import com.journeydigitalpractical.viewmodel.PostViewModelFactory
+import com.journeydigitalpractical.viewmodel.ViewModelFactory
 import com.journeydigitalpractical.viewmodel.PostsViewModel
 import kotlinx.android.synthetic.main.activity_posts.*
 
@@ -28,10 +29,17 @@ class PostsActivity : AppCompatActivity() {
         // set recyclerview adapter
         recyclerview.adapter = postsAdapter
 
+        //Define the click of adapter item
+        postsAdapter.onItemClick = { it ->
+            val intent = Intent(this, PostDetailsActivity::class.java)
+            intent.putExtra("post", it)
+            startActivity(intent)
+        }
+
         val retrofitService = RetrofitService.getInstance()
         val postsRepository = PostsRepository(retrofitService)
 
-        viewModel = ViewModelProvider(this, PostViewModelFactory(postsRepository)).get(PostsViewModel::class.java)
+        viewModel = ViewModelProvider(this, ViewModelFactory(postsRepository)).get(PostsViewModel::class.java)
 
         // observe the post lists once available load into adapter
         viewModel.postsList.observe(this) {

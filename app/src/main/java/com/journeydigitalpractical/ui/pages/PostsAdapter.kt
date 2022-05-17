@@ -12,9 +12,10 @@ import kotlinx.android.synthetic.main.single_posts_layout.view.*
 /**
  * Single post list adapter
  */
-class PostsAdapter : RecyclerView.Adapter<PostsViewHolder>() {
+class PostsAdapter : RecyclerView.Adapter<PostsAdapter.PostsViewHolder>() {
 
     var postList = mutableListOf<Posts>()
+    var onItemClick: ((Posts) -> Unit)? = null
 
     @SuppressLint("NotifyDataSetChanged")
     fun setPosts(postList: List<Posts>){
@@ -33,16 +34,22 @@ class PostsAdapter : RecyclerView.Adapter<PostsViewHolder>() {
 
     override fun getItemCount()= postList.size
 
+    /**
+     * Single post design view holder
+     */
+    inner class PostsViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
+        init {
+            itemView.setOnClickListener {
+                onItemClick?.invoke(postList[adapterPosition])
+            }
+        }
+        fun bind(posts: Posts){
+            itemView.postTitle.text = posts.title
+            itemView.postDescription.text = posts.body
+        }
 
-}
-
-/**
- * Single post design view holder
- */
-class PostsViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-    fun bind(posts: Posts){
-        itemView.postTitle.text = posts.title
-        itemView.postDescription.text = posts.body
     }
 
 }
+
+
