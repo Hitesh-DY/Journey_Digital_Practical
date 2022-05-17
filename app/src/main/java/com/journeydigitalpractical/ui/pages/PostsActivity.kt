@@ -10,6 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.journeydigitalpractical.R
 import com.journeydigitalpractical.data.api.RetrofitService
+import com.journeydigitalpractical.data.local.DatabaseBuilder
+import com.journeydigitalpractical.data.local.DatabaseHelperImpl
 import com.journeydigitalpractical.data.repository.PostsRepository
 import com.journeydigitalpractical.viewmodel.ViewModelFactory
 import com.journeydigitalpractical.viewmodel.PostsViewModel
@@ -42,7 +44,9 @@ class PostsActivity : AppCompatActivity() {
 
         performSearch()
 
-        viewModel = ViewModelProvider(this, ViewModelFactory(postsRepository)).get(PostsViewModel::class.java)
+        viewModel = ViewModelProvider(this, ViewModelFactory(postsRepository,
+            DatabaseHelperImpl(DatabaseBuilder.getInstance(applicationContext))
+            )).get(PostsViewModel::class.java)
 
         // observe the post lists once available load into adapter
         viewModel.postsList.observe(this) {
@@ -63,7 +67,7 @@ class PostsActivity : AppCompatActivity() {
         })
 
         // call Api to get post lists
-        viewModel.getAllPosts()
+        viewModel.getAllPosts(this)
     }
 
     private fun performSearch() {

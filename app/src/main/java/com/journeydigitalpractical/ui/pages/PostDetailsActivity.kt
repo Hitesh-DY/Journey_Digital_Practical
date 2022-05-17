@@ -9,6 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.journeydigitalpractical.R
 import com.journeydigitalpractical.data.api.RetrofitService
+import com.journeydigitalpractical.data.local.DatabaseBuilder
+import com.journeydigitalpractical.data.local.DatabaseHelperImpl
 import com.journeydigitalpractical.data.model.Posts
 import com.journeydigitalpractical.data.repository.PostsRepository
 import com.journeydigitalpractical.viewmodel.CommentsViewModel
@@ -40,7 +42,9 @@ class PostDetailsActivity : AppCompatActivity() {
 
         performSearch()
 
-        viewModel = ViewModelProvider(this, ViewModelFactory(postsRepository)).get(CommentsViewModel::class.java)
+        viewModel = ViewModelProvider(this, ViewModelFactory(postsRepository,
+            DatabaseHelperImpl(DatabaseBuilder.getInstance(applicationContext))
+        )).get(CommentsViewModel::class.java)
 
         // observe the post lists once available load into adapter
         viewModel.commentList.observe(this) {
@@ -61,7 +65,7 @@ class PostDetailsActivity : AppCompatActivity() {
         })
 
         // call Api to get post lists
-        viewModel.getAllCommentsOfPost(id!!)
+        viewModel.getAllCommentsOfPost(id!!, this)
 
 
     }

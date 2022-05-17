@@ -29,8 +29,7 @@ class PostsAdapter : RecyclerView.Adapter<PostsAdapter.PostsViewHolder>() {
     @SuppressLint("NotifyDataSetChanged")
     fun filterList(searchQuery : String){
         if(this.postList.size > 0){
-            this.matchedPosts = this.postList.filter { it.body.lowercase().contains(searchQuery.lowercase())
-                    || it.title.lowercase().contains(searchQuery.lowercase()) } as MutableList<Posts>
+            this.matchedPosts = this.postList.filter { it.title.lowercase().contains(searchQuery.lowercase()) } as MutableList<Posts>
             notifyDataSetChanged()
         }
     }

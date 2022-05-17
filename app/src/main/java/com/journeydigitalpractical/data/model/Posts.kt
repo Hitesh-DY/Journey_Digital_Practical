@@ -1,7 +1,15 @@
 package com.journeydigitalpractical.data.model
 
 import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Posts(val userId : Int, val id : Int, val title : String, val body : String): Parcelable
+@Entity
+data class Posts(
+    @ColumnInfo(name = "userId") val userId : Int,
+    @PrimaryKey val id : Int,
+    @ColumnInfo(name = "title") val title : String,
+    @ColumnInfo(name = "body") val body : String): Parcelable
