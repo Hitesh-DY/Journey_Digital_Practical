@@ -9,5 +9,4 @@ import com.journeydigitalpractical.data.model.Posts
 @Database(entities = [Posts::class, Comments::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun postsDao(): PostsDao
-
 }

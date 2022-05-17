@@ -28,6 +28,7 @@ class PostsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_posts)
+        supportActionBar?.title = "Posts"
 
         // set recyclerview adapter
         recyclerview.adapter = postsAdapter

@@ -17,20 +17,20 @@
             android:orientation="vertical"
             android:layout_margin="10dp"
             android:layout_height="wrap_content">
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/commentUserName"
                 android:layout_width="match_parent"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_height="wrap_content"/>
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/commentUserEmail"
                 android:layout_width="match_parent"
                 android:textSize="16sp"
                 android:layout_height="wrap_content"/>
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/commentDescription"
                 android:layout_marginTop="10dp"
                 android:textSize="12sp"

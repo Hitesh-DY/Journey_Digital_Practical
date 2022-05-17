@@ -7,6 +7,9 @@ import androidx.room.Query
 import com.journeydigitalpractical.data.model.Comments
 import com.journeydigitalpractical.data.model.Posts
 
+/**
+ * Posts Dao class for perform local db table operations on posts & comments table
+ */
 @Dao
 interface PostsDao {
 

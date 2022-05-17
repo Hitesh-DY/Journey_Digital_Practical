@@ -9,6 +9,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+/**
+ * RetrofitService
+ */
 interface RetrofitService {
 
     @GET("posts")

@@ -33,9 +33,12 @@ class PostDetailsActivity : AppCompatActivity() {
         val data = intent.extras
         val posts = data?.getParcelable<Posts>("post")
         val id = posts?.id
+        supportActionBar?.title = posts?.title
 
         // set recyclerview adapter
         recyclerviewComments.adapter = commentsAdapter
+
+        description.text = posts?.body
 
         val retrofitService = RetrofitService.getInstance()
         val postsRepository = PostsRepository(retrofitService)

@@ -2,6 +2,11 @@ package com.journeydigitalpractical.data.local
 
 import android.content.Context
 import androidx.room.Room
+
+/**
+ * DatabaseBuilder class used for create singleton instance of Room Database class
+ * A singleton is a design pattern that restricts the instantiation of a class to only one instance
+ */
 object DatabaseBuilder {
 
     private var INSTANCE: AppDatabase? = null
